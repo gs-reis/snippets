@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<CodeSnippets  
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">  
+    <CodeSnippet Format="1.0.0">  
+        <Header>  
+            <Title>Enum Extensions</Title> 
+			<Author>Gabriel Santos Reis</Author>  
+			<Description>
+				Cria Classe EnumExtensions com a implementação do método para obter a descrição de uma enum.
+			</Description>  
+			<Shortcut>EnumExt</Shortcut> 			
+        </Header>  
+        <Snippet>  
+            <Code Language="csharp">  
+                <![CDATA[public static class EnumExtensions
+    {
+        public static string GetDisplayName(this Enum enumValue)
+        {
+            return enumValue.GetType()
+            .GetMember(enumValue.ToString())
+            .First()
+            .GetCustomAttribute<DisplayAttribute>()
+            .Name;
+        }
+
+    }]]>  
+            </Code>  
+        </Snippet>  
+    </CodeSnippet>  
+</CodeSnippets>  

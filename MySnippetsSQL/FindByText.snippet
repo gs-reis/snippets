@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Find by Description</Title>
+            <Shortcut></Shortcut>
+			<Description>Snippet para obter as tabelas com a coluna.</Description>
+			<Author>Gabriel Santos Reis</Author>
+			<SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+					<ID>Descricao</ID>
+					<ToolTip>Informação a ser procurada no corpo da procedure, função ou view</ToolTip>
+					<Default>descricao</Default>
+				</Literal>
+				<Literal>
+					<ID>TipoObjeto</ID>
+					<ToolTip>Tipo de objeto a ser localizado:
+						U => Tabela Usuário
+						S => Tabela de sistema
+						P => Procedure
+						V => View
+						F => Function					
+					</ToolTip>
+					<Default>u</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="SQL"><![CDATA[
+SELECT A.NAME, A.TYPE, B.TEXT
+	FROM SYSOBJECTS  A (nolock)
+	JOIN SYSCOMMENTS B (nolock) 
+	ON A.ID = B.ID
+WHERE B.TEXT LIKE '%[$Descricao$]%'
+	AND A.TYPE = '[$TipoObjeto$]'
+	ORDER BY A.NAME
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
