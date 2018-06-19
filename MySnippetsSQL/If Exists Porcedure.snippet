@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+<_locDefinition xmlns="urn:locstudio">
+    <_locDefault _loc="locNone" />
+    <_locTag _loc="locData">Title</_locTag>
+    <_locTag _loc="locData">Description</_locTag>
+    <_locTag _loc="locData">Author</_locTag>
+    <_locTag _loc="locData">ToolTip</_locTag>
+</_locDefinition>
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Cria Procedure com verificação</Title>
+			<Shortcut></Shortcut>
+			<Description>Cria Procedure com verificação se já existe,
+Se já existe, apenas altera,
+Se não existe cria uma Procedure padrão para ser alterada</Description>
+			<Author>Gabriel</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Declarations>
+                                <Literal>
+                                	<ID>SchemaName</ID>
+                                	<ToolTip>Schema Name</ToolTip>
+                                	<Default>dbo</Default>
+                                </Literal>
+                                <Literal>
+                                	<ID>ProcedureName</ID>
+                                	<ToolTip>Procedure Name</ToolTip>
+                                	<Default>ProcedureName</Default>
+                                </Literal>
+                                <Literal>
+                                	<ID>Param1</ID>
+                                	<ToolTip>Name of the input parameter</ToolTip>
+                                	<Default>param1</Default>
+                                </Literal>
+                                <Literal>
+                                	<ID>Datatype_Param1</ID>
+                                	<ToolTip>Data type of the input parameter</ToolTip>
+                                	<Default>int</Default>
+                                </Literal>
+                                <Literal>
+                                	<ID>Param2</ID>
+                                	<ToolTip>Name of the input parameter</ToolTip>
+                                	<Default>param2</Default>
+                                </Literal>
+                                <Literal>
+                                	<ID>Datatype_Param2</ID>
+                                	<ToolTip>Data type of the input parameter</ToolTip>
+                                	<Default>char(5)</Default>
+                                </Literal>
+			</Declarations>
+			<Code Language="SQL">
+<![CDATA[IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID (N'[$SchemaName$].[$ProcedureName$]') AND type IN (N'P', N'PC'))
+BEGIN
+	EXEC sp_executesql N'CREATE PROCEDURE [$SchemaName$].[$ProcedureName$] AS SELECT 1'
+END
+GO
+ALTER PROCEDURE [$SchemaName$].[$ProcedureName$]
+    @$Param1$ $Datatype_Param1$,
+    @$Param2$ $Datatype_Param2$
+AS
+    SELECT @$Param1$ AS c1,
+	       @$Param2$ AS c2
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
