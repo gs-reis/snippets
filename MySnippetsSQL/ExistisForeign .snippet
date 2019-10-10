@@ -26,7 +26,7 @@
 			<Code Language="SQL">
         <![CDATA[IF (NOT EXISTS (SELECT 1
 	FROM sys.foreign_keys
-	WHERE  parent_object_id = OBJECT_ID('$TabelaReferencia$') OR referenced_object_id = OBJECT_ID('$TabelaReferenciada$')))
+	WHERE  parent_object_id = OBJECT_ID('$TabelaReferencia$') AND referenced_object_id = OBJECT_ID('$TabelaReferenciada$')))
 BEGIN
 $selected$ $end$ 
 END]]>
