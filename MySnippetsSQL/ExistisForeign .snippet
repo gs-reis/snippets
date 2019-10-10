@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>IF EXISTIS FOREIGN</Title>
+			<Shortcut></Shortcut>
+			<Description>Verifica se existe a Foreing Key pelo nome tabela.</Description>
+			<Author>Gabriel Santos Reis</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+			</Header>
+		<Snippet>
+			<Declarations>
+        <Literal>
+          <ID>TabelaReferencia</ID>
+          <ToolTip>Nome da tabela que tem a referência</ToolTip>
+          <Default>TabelaReferencia</Default>
+        </Literal>
+        <Literal>
+          <ID>TabelaReferenciada</ID>
+          <ToolTip>Nome da tabela que é referenciada pela Foreing Key</ToolTip>
+          <Default>TabelaReferenciada</Default>
+        </Literal>
+      </Declarations>
+			<Code Language="SQL">
+        <![CDATA[IF (NOT EXISTS (SELECT 1
+	FROM sys.foreign_keys
+	WHERE  parent_object_id = OBJECT_ID('$TabelaReferencia$') OR referenced_object_id = OBJECT_ID('$TabelaReferenciada$')))
+BEGIN
+$selected$ $end$ 
+END]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
