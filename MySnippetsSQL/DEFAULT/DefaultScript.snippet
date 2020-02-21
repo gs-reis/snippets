@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>DEFAULT SCRIPT</Title>
+			<Shortcut></Shortcut>
+			<Description>Gera Script Default Com a verificação do banco e tratamento de erro .</Description>
+			<Author>Gabriel Santos Reis</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+			</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+				  <ID>NumeroUserStory</ID>
+				  <ToolTip>Número da User Story</ToolTip>
+				  <Default>00000</Default>
+				</Literal>
+				<Literal>
+				  <ID>TituloUserStory</ID>
+				  <ToolTip>Título User Story</ToolTip>
+				  <Default>Escreva aqui o Título</Default>
+				</Literal>
+				<Literal>
+				  <ID>DataBaseName</ID>
+				  <ToolTip>Nome do DataBase</ToolTip>
+				  <Default>Educacao...</Default>
+				</Literal>
+				<Literal>
+				  <ID>Dia</ID>
+				  <ToolTip>Dia</ToolTip>
+				  <Default>01</Default>
+				</Literal>
+				<Literal>
+				  <ID>Mes</ID>
+				  <ToolTip>Mês</ToolTip>
+				  <Default>01</Default>
+				</Literal>
+				<Literal>
+				  <ID>Ano</ID>
+				  <ToolTip>Ano</ToolTip>
+				  <Default>20</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="SQL">
+<![CDATA[/***********************************************************************
+	User Story: $NumeroUserStory$
+	Título: N'$TituloUserStory$'
+	Gerado por: Gabriel Santos Reis
+	Gerado em: $Dia$/$Mes$/20$Ano$
+***********************************************************************/
+
+/***********************************************************************
+    Objetivo:	(X) Alteraão de estrutura (DDL)
+				(X) Compatibilização de dados (DML)
+***********************************************************************/
+
+SET LANGUAGE English
+
+GO
+IF (DB_NAME() LIKE '$DataBaseName$%' )
+	BEGIN
+		BEGIN TRY
+		BEGIN TRAN;
+			
+			--ESCREVA AQUI O CÓDIGO
+
+		COMMIT TRAN;
+        PRINT '(WI:$NumeroUserStory$) SUCESSO NA Atualização: ' + CAST(ISNULL(ERROR_NUMBER(), 0) AS VARCHAR) + ' - ' + ISNULL(ERROR_MESSAGE(), 'NO WARNING');
+    END TRY
+    BEGIN CATCH
+		ROLLBACK;
+        PRINT '(WI:$NumeroUserStory$) FALHA NA Atualização: ' + CAST(ISNULL(ERROR_NUMBER(), 0) AS VARCHAR) + ' - ' + ISNULL(ERROR_MESSAGE(), 'NO INFO');
+    END CATCH;
+
+END;
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

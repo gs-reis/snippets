@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>IF EXISTIS COLUNM</Title>
+			<Shortcut></Shortcut>
+			<Description>Verifica se existe a Coluna na Tabela.</Description>
+			<Author>Gabriel Santos Reis</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+			</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+				  <ID>NomeTabela</ID>
+				  <ToolTip>Nome da tabela</ToolTip>
+				  <Default>NomeTabela</Default>
+				</Literal>
+				<Literal>
+				  <ID>NomeColuna</ID>
+				  <ToolTip>Nome da Coluna</ToolTip>
+				  <Default>NomeColuna</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="SQL">
+<![CDATA[
+
+IF  NOT EXISTS(SELECT 1 FROM SYS.COLUMNS 
+	WHERE Name = N'$NomeColuna$'
+	AND Object_ID = Object_ID(N'$NomeTabela$'))
+BEGIN
+	--Escreva seu script aqui. 
+END
+BEGIN
+	PRINT 'Coluna $NomeColuna$ já Criada';
+END
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

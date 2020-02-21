@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>IF EXISTIS TABLE</Title>
+			<Shortcut></Shortcut>
+			<Description>Verifica se existe a Tabela pelo nome tabela.</Description>
+			<Author>Gabriel Santos Reis</Author>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+			</Header>
+		<Snippet>
+			<Declarations>
+				<Literal>
+				  <ID>NomeTabela</ID>
+				  <ToolTip>Nome da tabela</ToolTip>
+				  <Default>NomeTabela</Default>
+				</Literal>
+			</Declarations>
+			<Code Language="SQL">
+<![CDATA[
+IF (NOT EXISTS (SELECT * 
+        FROM INFORMATION_SCHEMA.TABLES 
+        WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = '$NomeTabela$'))
+BEGIN
+
+--Escreva seu script aqui. 
+
+ELSE
+BEGIN
+	PRINT 'Table $NomeTabela$ Já Criada';
+END
+]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
